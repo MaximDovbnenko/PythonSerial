@@ -61,6 +61,5 @@ while True:
     direction = -1 if dT < 0 else 1
     dT = abs(dT)
     Error = EPS - dT
-    
     pass
 
