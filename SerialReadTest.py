@@ -59,10 +59,13 @@ class DataGather:
         for line in self.DataArray:
             if signal == 1:
                 if line.D1 == self.Val: break
+                else : i += 1
             if signal == 2: 
                 if line.D2 == self.Val: break
-            i += 1
+                else : i += 1
+        if i >= len(self.DataArray): i =len(self.DataArray) - 1   
         return i
+    
     def calculate(self):
         self.get_data()
         self.DataArray.clear()
@@ -73,6 +76,7 @@ class DataGather:
                 self.DataArray.append(tmp_data)
         IndexD1 = self.indexOf(1)
         IndexD2 = self.indexOf(2)
+        #print(IndexD1, IndexD2, len(self.DataArray))
         ResultTime = self.DataArray[IndexD1].Time - self.DataArray[IndexD2].Time
         return ResultTime
         
