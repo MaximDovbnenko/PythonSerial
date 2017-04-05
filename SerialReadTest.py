@@ -53,7 +53,16 @@ class DataGather:
         data = data[2:]
         data = data.replace("\\r\\n'", '')
         return data
-
+    
+    def indexOf(self, signal):
+        i = 0;
+        for line in self.DataArray:
+            if signal == 1:
+                if line.D1 == self.Val: break
+            if signal == 2: 
+                if line.D2 == self.Val: break
+            i += 1
+        return i
     def calculate(self):
         self.get_data()
         self.DataArray.clear()
@@ -62,20 +71,8 @@ class DataGather:
             if len(split_data) == 3:
                 tmp_data = DataLine(split_data[0], split_data[1], split_data[2])
                 self.DataArray.append(tmp_data)
-        IndexD1 = 0
-        IndexD2 = 0
-        i = 0
-        for line in self.DataArray:
-            if line.D1 == self.Val: 
-                IndexD1 = i
-                break
-            i += 1
-        i = 0
-        for line in self.DataArray:
-            if line.D2 == self.Val: 
-                IndexD2 = i
-                break
-            i += 1
+        IndexD1 = self.indexOf(1)
+        IndexD2 = self.indexOf(2)
         ResultTime = self.DataArray[IndexD1].Time - self.DataArray[IndexD2].Time
         return ResultTime
         
