@@ -63,7 +63,7 @@ class DataGather:
             if signal == 2: 
                 if line.D2 == self.Val: break
                 else : i += 1
-        if i >= len(self.DataArray): i =len(self.DataArray) - 1   
+        if i >= len(self.DataArray): i = -1   
         return i
     
     def calculate(self):
