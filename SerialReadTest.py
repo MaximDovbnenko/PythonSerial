@@ -79,6 +79,10 @@ class DataGather:
         #print(IndexD1, IndexD2, len(self.DataArray))
         ResultTime = self.DataArray[IndexD1].Time - self.DataArray[IndexD2].Time
         return ResultTime
+    def setStartF(self, f):
+        self.serial.writelines('100:'+f+';')
         
-
-
+    def incF(self):
+        self.serial.writelines('101;')
+    def decF(self):
+        self.serial.writelines('102;')
