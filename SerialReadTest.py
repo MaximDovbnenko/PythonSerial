@@ -30,7 +30,7 @@ class DataLine:
             self.Time = 0
     def __str__(self):
         return "{"+self.D1+","+self.D2+","+self.Time+"}"
-
+  
 class DataGather:
     def __init__(self, comPort, rate, maxCount, s_val):
         self.DataArrayString = []
@@ -79,10 +79,21 @@ class DataGather:
         #print(IndexD1, IndexD2, len(self.DataArray))
         ResultTime = self.DataArray[IndexD1].Time - self.DataArray[IndexD2].Time
         return ResultTime
+    def convertCommandToSendSerial(self, cmd):
+        pass
+    def Start(self):
+        self.serial.write('100;'.encode())
     def setStartF(self, f):
-        self.serial.writelines('100:'+f+';')
-        
+        tmp = str(f).encode()
+        cmd = '101 '.encode()+ tmp +';'.encode()
+        #print(cmd)
+        self.serial.write(cmd)
+    def setStep(self, f):
+        tmp = str(f).encode()
+        cmd = '102 '.encode()+ tmp +';'.encode()
+        #print(cmd)
+        self.serial.write(cmd)
     def incF(self):
-        self.serial.writelines('101;')
+        self.serial.write('103;'.encode())
     def decF(self):
-        self.serial.writelines('102;')
+        self.serial.write('104;'.encode())
